@@ -1,0 +1,26 @@
+body {
+    font-family: Arial;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input,
+select,
+button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+button {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
