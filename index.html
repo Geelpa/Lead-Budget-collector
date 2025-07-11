@@ -8,78 +8,97 @@
 </head>
 
 <body>
-    <h2>Formulário de Adesão</h2>
-    <form id="formulario">
-        <label>Nome completo:
-            <input type="text" id="nome" required>
-        </label>
+    <div class="container">
+        <h2>Formulário de Adesão</h2>
+        <form id="formulario">
+            <!-- Dados Pessoais -->
+            <fieldset>
+                <legend>📍 Dados Pessoais</legend>
+                <div class="form-group full">
+                    <label>Nome completo:
+                        <input type="text" id="nome" required>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Data de nascimento:
+                        <input type="date" id="nascimento" required>
+                    </label>
+                    <label>Email:
+                        <input type="email" id="email" required>
+                    </label>
+                </div>
+                <div class="form-group full">
+                    <label>Canal de venda:
+                        <input type="text" id="canal" required>
+                    </label>
+                </div>
+            </fieldset>
 
-        <label>Data de nascimento:
-            <input type="date" id="nascimento" required>
-        </label>
+            <!-- Endereço -->
+            <fieldset>
+                <legend>🏡 Localização</legend>
+                <div class="form-group">
+                    <label>CEP:
+                        <input type="text" id="cep" maxlength="9" placeholder="00000-000">
+                    </label>
+                    <label>Rua:
+                        <input type="text" id="rua" required>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Número:
+                        <input type="text" id="numero" required>
+                    </label>
+                    <label>Bairro:
+                        <input type="text" id="bairro" required>
+                    </label>
+                </div>
+                <div class="form-group full">
+                    <label>Cidade:
+                        <input type="text" id="cidade" required>
+                    </label>
+                </div>
+            </fieldset>
 
-        <label>CEP:
-            <input type="text" id="cep" maxlength="9" placeholder="00000-000">
-        </label>
+            <!-- Plano -->
+            <fieldset>
+                <legend>📦 Plano e Fatura</legend>
 
-        <label>Rua:
-            <input type="text" id="rua" required>
-        </label>
+                <div class="form-group full">
+                    <label>Plano escolhido:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="plano" value="100mb" required> 100mb - R$111,00</label>
+                        <label><input type="radio" name="plano" value="400mb"> 400mb - R$122,11</label>
+                        <label><input type="radio" name="plano" value="600mb"> 600mb - R$144,32</label>
+                        <label><input type="radio" name="plano" value="800mb"> 800mb - R$166,55</label>
+                        <label><input type="radio" name="plano" value="1000mb"> 1000mb - R$221,11</label>
+                    </div>
+                </div>
 
-        <label>Número:
-            <input type="text" id="numero" required>
-        </label>
+                <div class="form-group full">
+                    <label>Data de vencimento:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="vencimento" value="5" required> Dia 5</label>
+                        <label><input type="radio" name="vencimento" value="10"> Dia 10</label>
+                        <label><input type="radio" name="vencimento" value="15"> Dia 15</label>
+                        <label><input type="radio" name="vencimento" value="20"> Dia 20</label>
+                        <label><input type="radio" name="vencimento" value="25"> Dia 25</label>
+                    </div>
+                </div>
 
-        <label>Bairro:
-            <input type="text" id="bairro" required>
-        </label>
+                <div class="form-group full">
+                    <label>Forma de pagamento da taxa de adesão:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="pagamento" value="PIX" required> PIX</label>
+                        <label><input type="radio" name="pagamento" value="Dinheiro"> Dinheiro</label>
+                        <label><input type="radio" name="pagamento" value="Cartão de Crédito"> Cartão de Crédito</label>
+                    </div>
+                </div>
+            </fieldset>
 
-        <label>Cidade:
-            <input type="text" id="cidade" required>
-        </label>
-
-        <label>Canal de venda:
-            <input type="text" id="canal" required>
-        </label>
-
-        <label>Plano escolhido:
-            <select id="plano" required>
-                <option value="">Selecione</option>
-                <option value="100mb">100mb - R$111,00</option>
-                <option value="400mb">400mb - R$122,11</option>
-                <option value="600mb">600mb - R$144,32</option>
-                <option value="800mb">800mb - R$166,55</option>
-                <option value="1000mb">1000mb - R$221,11</option>
-            </select>
-        </label>
-
-        <label>Email:
-            <input type="email" id="email" required>
-        </label>
-
-        <label>Data de vencimento:
-            <select id="vencimento" required>
-                <option value="">Selecione</option>
-                <option value="5">Dia 5</option>
-                <option value="10">Dia 10</option>
-                <option value="15">Dia 15</option>
-                <option value="20">Dia 20</option>
-                <option value="25">Dia 25</option>
-            </select>
-        </label>
-
-        <label>Forma de pagamento da taxa de adesão:
-            <select id="pagamento" required>
-                <option value="">Selecione</option>
-                <option value="PIX">PIX</option>
-                <option value="Dinheiro">Dinheiro</option>
-                <option value="Cartão de Crédito">Cartão de Crédito</option>
-            </select>
-        </label>
-
-        <button type="button" onclick="enviarFormulario()">Enviar via WhatsApp</button>
-    </form>
-
+            <button type="button" onclick="enviarFormulario()">Enviar via WhatsApp</button>
+        </form>
+    </div>
     <script src="script.js"></script>
 </body>
 

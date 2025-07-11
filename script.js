@@ -2,8 +2,8 @@ function calcularIdade(dataNascimento) {
     const hoje = new Date();
     const nascimento = new Date(dataNascimento);
     let idade = hoje.getFullYear() - nascimento.getFullYear();
-    const mes = hoje.getMonth() - nascimento.getMonth();
-    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+    const m = hoje.getMonth() - nascimento.getMonth();
+    if (m < 0 || (m === 0 && hoje.getDate() < nascimento.getDate())) {
         idade--;
     }
     return idade;
@@ -12,19 +12,19 @@ function calcularIdade(dataNascimento) {
 function enviarFormulario() {
     const nome = document.getElementById("nome").value.trim();
     const nascimento = document.getElementById("nascimento").value;
+    const email = document.getElementById("email").value.trim();
+    const canal = document.getElementById("canal").value.trim();
+    const cep = document.getElementById("cep").value.trim();
     const rua = document.getElementById("rua").value.trim();
     const numero = document.getElementById("numero").value.trim();
     const bairro = document.getElementById("bairro").value.trim();
     const cidade = document.getElementById("cidade").value.trim();
-    const canal = document.getElementById("canal").value.trim();
-    const plano = document.getElementById("plano").value;
-    const email = document.getElementById("email").value.trim();
-    const vencimento = document.getElementById("vencimento").value;
-    const pagamento = document.getElementById("pagamento").value;
-    const cep = document.getElementById("cep").value.trim();
 
-    // Validação
-    if (!nome || !nascimento || !rua || !numero || !bairro || !cidade || !canal || !plano || !email || !vencimento || !pagamento) {
+    const plano = document.querySelector('input[name="plano"]:checked')?.value;
+    const vencimento = document.querySelector('input[name="vencimento"]:checked')?.value;
+    const pagamento = document.querySelector('input[name="pagamento"]:checked')?.value;
+
+    if (!nome || !nascimento || !email || !canal || !rua || !numero || !bairro || !cidade || !plano || !vencimento || !pagamento) {
         alert("Por favor, preencha todos os campos.");
         return;
     }
@@ -42,19 +42,45 @@ function enviarFormulario() {
         "1000mb": "R$221,11"
     };
 
-    const mensagem = `*Formulário de Adesão:*
-      
-*Nome:* ${nome}
-*Data de Nascimento:* ${nascimento}
-*Endereço:* ${rua}, ${numero}, ${bairro}, ${cidade}${cep ? ` - CEP: ${cep}` : ""}
-*Canal de Venda:* ${canal}
-*Plano Escolhido:* ${plano} - ${planos[plano]}
-*E-mail:* ${email}
-*Data de Vencimento:* Dia ${vencimento}
-*Forma de Pagamento da Adesão:* ${pagamento}`;
+    const mensagem = `*📍 DADOS PESSOAIS:*\n` +
+        `• Nome: ${nome}\n` +
+        `• Nascimento: ${nascimento}\n` +
+        `• Email: ${email}\n` +
+        `• Canal de venda: ${canal}\n\n` +
 
-    const mensagemCodificada = encodeURIComponent(mensagem);
+        `*🏡 LOCALIZAÇÃO:*\n` +
+        `• Rua: ${rua}, nº ${numero}\n` +
+        `• Bairro: ${bairro}\n` +
+        `• Cidade: ${cidade}\n` +
+        `${cep ? "• CEP: " + cep + "\n" : ""}\n` +
+
+        `*📦 PLANO E FATURA:*\n` +
+        `• Plano escolhido: ${plano} - ${planos[plano]}\n` +
+        `• Vencimento da fatura: Dia ${vencimento}\n` +
+        `• Pagamento da adesão: ${pagamento}`;
+
     const telefone = "5551989045720";
-    const url = `https://wa.me/${telefone}?text=${mensagemCodificada}`;
+    const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, "_blank");
 }
+
+// ViaCEP
+document.getElementById("cep").addEventListener("blur", function () {
+    const cep = this.value.replace(/\D/g, "");
+    if (cep.length !== 8) return;
+
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(response => response.json())
+        .then(data => {
+            if (!("erro" in data)) {
+                document.getElementById("rua").value = data.logradouro || "";
+                document.getElementById("bairro").value = data.bairro || "";
+                document.getElementById("cidade").value = data.localidade || "";
+            } else {
+                alert("CEP não encontrado.");
+            }
+        })
+        .catch(() => {
+            alert("Erro ao buscar o CEP.");
+        });
+});

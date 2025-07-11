@@ -1,26 +1,108 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial;
-    max-width: 600px;
-    margin: auto;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ef7e24;
     padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 750px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 32px;
+    border-radius: 12px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ef7e24;
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 20px;
+}
+
+legend {
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #ef7e24;
+    font-size: 16px;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-group.full {
+    grid-template-columns: 1fr;
 }
 
 label {
+    /* font-size: 14px; */
     display: block;
-    margin-top: 10px;
+    color: #444;
+    font-weight: bold;
 }
 
-input,
-select,
-button {
+input[type="text"],
+input[type="email"],
+input[type="date"] {
     width: 100%;
     padding: 8px;
-    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    /* margin: 16px; */
+    font-size: 16px;
+}
+
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
 }
 
 button {
-    background-color: green;
+    background-color: #ef7e24;
     color: white;
-    font-weight: bold;
+    padding: 14px;
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #d96f1e;
+}
+
+@media (max-width: 600px) {
+    .form-group {
+        grid-template-columns: 1fr;
+    }
+
+    .radio-group {
+        flex-direction: column;
+    }
 }
