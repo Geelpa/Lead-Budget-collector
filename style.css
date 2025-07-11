@@ -17,22 +17,26 @@ body {
     background-color: #ffffff;
     padding: 32px;
     border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     color: #ef7e24;
+    font-size: 22px;
 }
 
 fieldset {
     border: none;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
 }
 
 legend {
     font-weight: bold;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     color: #ef7e24;
     font-size: 16px;
 }
@@ -40,8 +44,8 @@ legend {
 .form-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
 .form-group.full {
@@ -49,60 +53,99 @@ legend {
 }
 
 label {
-    /* font-size: 14px; */
     display: block;
     color: #444;
     font-weight: bold;
+    font-size: 14px;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="date"] {
     width: 100%;
-    padding: 8px;
+    padding: 12px;
+    margin-top: 6px;
     border-radius: 8px;
     border: 1px solid #ccc;
-    /* margin: 16px; */
     font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #ef7e24;
 }
 
 .radio-group {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
 .radio-group label {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 14px;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: background-color 0.2s ease, border 0.2s ease;
+}
+
+.radio-group label:hover {
+    background-color: #f1f1f1;
+    border-color: #ef7e24;
+}
+
+.radio-group input[type="radio"] {
+    accent-color: #ef7e24;
+    cursor: pointer;
 }
 
 button {
     background-color: #ef7e24;
     color: white;
-    padding: 14px;
+    padding: 16px;
     width: 100%;
-    font-size: 16px;
+    font-size: 17px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px;
+    font-weight: bold;
 }
 
 button:hover {
     background-color: #d96f1e;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .form-group {
         grid-template-columns: 1fr;
     }
 
     .radio-group {
         flex-direction: column;
+        gap: 12px;
+    }
+
+    .container {
+        padding: 24px 20px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"] {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 16px;
     }
 }
