@@ -136,6 +136,7 @@ button:hover {
 
     .container {
         padding: 24px 20px;
+        min-width: 100%;
     }
 
     input[type="text"],
