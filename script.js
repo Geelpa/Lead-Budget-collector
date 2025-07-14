@@ -89,3 +89,46 @@ document.getElementById("cep").addEventListener("blur", function () {
             alert("Erro ao buscar o CEP.");
         });
 });
+const opcoesCanal = [
+    "Google",
+    "Indicação",
+    "Site",
+    "Redes sociais",
+    "Feiras/ações",
+    "Indicação condomínio",
+    "Adesivo automotivo",
+    "Outros"
+];
+
+const inputCanal = document.getElementById("canal");
+const sugestoesCanal = document.getElementById("sugestoes-canal");
+
+inputCanal.addEventListener("input", () => {
+    const valor = inputCanal.value.toLowerCase();
+    sugestoesCanal.innerHTML = "";
+
+    if (valor.length === 0) return;
+
+    const filtradas = opcoesCanal.filter(opcao =>
+        opcao.toLowerCase().includes(valor)
+    );
+
+    filtradas.forEach(opcao => {
+        const li = document.createElement("li");
+        li.textContent = opcao;
+        li.onclick = () => {
+            inputCanal.value = opcao;
+            sugestoesCanal.innerHTML = "";
+        };
+        sugestoesCanal.appendChild(li);
+    });
+});
+
+// Fecha sugestões ao clicar fora
+document.addEventListener("click", (e) => {
+    if (!sugestoesCanal.contains(e.target) && e.target !== inputCanal) {
+        sugestoesCanal.innerHTML = "";
+    }
+});
+
+

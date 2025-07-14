@@ -31,9 +31,11 @@
                     <label>Email:
                         <input type="email" id="email" required>
                     </label>
-                    <label>Canal de venda:
-                        <input type="text" id="canal" required>
-                    </label>
+                    <div class="autocomplete-wrapper">
+                        <label for="canal">Canal de venda:</label>
+                        <input type="text" id="canal" placeholder="Digite ou selecione" autocomplete="off">
+                        <ul id="sugestoes-canal" class="sugestoes-lista"></ul>
+                    </div>
                 </div>
             </fieldset>
 
