@@ -12,6 +12,7 @@ function calcularIdade(dataNascimento) {
 function enviarFormulario() {
     const nome = document.getElementById("nome").value.trim();
     const nascimento = document.getElementById("nascimento").value;
+    const telefone = document.getElementById("telefone").value.trim();
     const email = document.getElementById("email").value.trim();
     const canal = document.getElementById("canal").value.trim();
     const cep = document.getElementById("cep").value.trim();
@@ -24,7 +25,7 @@ function enviarFormulario() {
     const vencimento = document.querySelector('input[name="vencimento"]:checked')?.value;
     const pagamento = document.querySelector('input[name="pagamento"]:checked')?.value;
 
-    if (!nome || !nascimento || !email || !canal || !rua || !numero || !bairro || !cidade || !plano || !vencimento || !pagamento) {
+    if (!nome || !telefone || !nascimento || !email || !canal || !rua || !numero || !bairro || !cidade || !plano || !vencimento || !pagamento) {
         alert("Por favor, preencha todos os campos.");
         return;
     }
@@ -42,25 +43,29 @@ function enviarFormulario() {
         "1000mb": "R$221,11"
     };
 
-    const mensagem = `*📍 DADOS PESSOAIS:*\n` +
+    const mensagem = `*DADOS PESSOAIS:*\n` +
         `• Nome: ${nome}\n` +
+        `• Telefone: ${telefone}\n` +
         `• Nascimento: ${nascimento}\n` +
         `• Email: ${email}\n` +
         `• Canal de venda: ${canal}\n\n` +
 
-        `*🏡 LOCALIZAÇÃO:*\n` +
+        `*LOCALIZAÇÃO:*\n` +
         `• Rua: ${rua}, nº ${numero}\n` +
         `• Bairro: ${bairro}\n` +
         `• Cidade: ${cidade}\n` +
         `${cep ? "• CEP: " + cep + "\n" : ""}\n` +
 
-        `*📦 PLANO E FATURA:*\n` +
+        `*PLANO E FATURA:*\n` +
         `• Plano escolhido: ${plano} - ${planos[plano]}\n` +
         `• Vencimento da fatura: Dia ${vencimento}\n` +
-        `• Pagamento da adesão: ${pagamento}`;
+        `• Pagamento da adesão: ${pagamento}`
 
-    const telefone = "5551989045720";
-    const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+            `*Guarde esta mensagem! Ela será utilizada para agilizar o seu atendimento!*"`
+        ;
+
+    const contato = "5551989045720";
+    const url = `https://wa.me/${contato}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, "_blank");
 }
 
