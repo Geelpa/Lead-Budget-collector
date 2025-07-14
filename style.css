@@ -72,6 +72,38 @@ input[type="date"] {
     transition: border 0.3s ease;
 }
 
+input#canal {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.sugestoes-lista {
+    background: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    max-height: 180px;
+    overflow-y: auto;
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+.sugestoes-lista li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.sugestoes-lista li:hover {
+    background-color: #ef7e24;
+    color: white;
+}
+
 input:focus {
     outline: none;
     border-color: #ef7e24;

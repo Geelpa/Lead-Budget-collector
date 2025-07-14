@@ -59,9 +59,9 @@ function enviarFormulario() {
         `*PLANO E FATURA:*\n` +
         `• Plano escolhido: ${plano} - ${planos[plano]}\n` +
         `• Vencimento da fatura: Dia ${vencimento}\n` +
-        `• Pagamento da adesão: ${pagamento}`
-
-            `*Guarde esta mensagem! Ela será utilizada para agilizar o seu atendimento!*"`
+        `• Pagamento da adesão: ${pagamento}\n` +
+        `\n` +
+        `*Guarde esta mensagem! Ela será utilizada para agilizar o seu atendimento!*"`
         ;
 
     const contato = "5551989045720";
@@ -89,7 +89,8 @@ document.getElementById("cep").addEventListener("blur", function () {
             alert("Erro ao buscar o CEP.");
         });
 });
-const opcoesCanal = [
+
+const opcoes = [
     "Google",
     "Indicação",
     "Site",
@@ -100,35 +101,57 @@ const opcoesCanal = [
     "Outros"
 ];
 
-const inputCanal = document.getElementById("canal");
-const sugestoesCanal = document.getElementById("sugestoes-canal");
+const input = document.getElementById("canal");
+const sugestoes = document.getElementById("sugestoes-canal");
 
-inputCanal.addEventListener("input", () => {
-    const valor = inputCanal.value.toLowerCase();
-    sugestoesCanal.innerHTML = "";
+function mostrarSugestoes(valorDigitado = "") {
+    sugestoes.innerHTML = "";
+    const valor = valorDigitado.toLowerCase().trim();
 
-    if (valor.length === 0) return;
+    const filtradas = valor
+        ? opcoes.filter(opcao => opcao.toLowerCase().includes(valor))
+        : opcoes;
 
-    const filtradas = opcoesCanal.filter(opcao =>
-        opcao.toLowerCase().includes(valor)
-    );
+    if (filtradas.length === 0) {
+        sugestoes.style.display = "none";
+        return;
+    }
 
     filtradas.forEach(opcao => {
         const li = document.createElement("li");
         li.textContent = opcao;
         li.onclick = () => {
-            inputCanal.value = opcao;
-            sugestoesCanal.innerHTML = "";
+            input.value = opcao;
+            sugestoes.innerHTML = "";
+            sugestoes.style.display = "none";
         };
-        sugestoesCanal.appendChild(li);
+        sugestoes.appendChild(li);
     });
+
+    sugestoes.style.display = "block";
+}
+
+// Mostra ao digitar
+input.addEventListener("input", () => {
+    mostrarSugestoes(input.value);
 });
 
-// Fecha sugestões ao clicar fora
+// Mostra ao clicar (sem digitar)
+input.addEventListener("focus", () => {
+    mostrarSugestoes("");
+});
+
+
+// Oculta sugestões ao clicar fora
 document.addEventListener("click", (e) => {
-    if (!sugestoesCanal.contains(e.target) && e.target !== inputCanal) {
-        sugestoesCanal.innerHTML = "";
+    if (!sugestoes.contains(e.target) && e.target !== input) {
+        sugestoes.style.display = "none";
     }
 });
 
-
+document.getElementById("formulario").addEventListener("submit", function (e) {
+    if (!opcoes.includes(input.value)) {
+        e.preventDefault();
+        alert("Selecione uma opção válida do canal de venda.");
+    }
+});
