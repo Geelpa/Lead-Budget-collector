@@ -17,7 +17,7 @@ body {
     background-color: #ffffff;
     padding: 32px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 2px 5px 5px #25252554;
 }
 
 h2 {
@@ -80,7 +80,14 @@ input#canal {
     border: 1px solid #ccc;
 }
 
+.autocomplete-wrapper {
+    position: relative;
+    width: 100%;
+}
+
 .sugestoes-lista {
+    position: absolute;
+    width: 100%;
     background: white;
     border: 1px solid #ccc;
     border-top: none;
@@ -92,6 +99,7 @@ input#canal {
     padding: 0;
     margin: 0;
     display: none;
+    box-shadow: 2px 5px 5px #25252554;
 }
 
 .sugestoes-lista li {
