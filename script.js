@@ -64,7 +64,7 @@ function enviarFormulario() {
         `• Data de vencimento: dia ${vencimento}\n` +
         `• Pagamento da adesão via: ${pagamento}\n\n` +
 
-        `*Guarde esta mensagem! Ela será utilizada para agilizar o seu atendimento!*"`
+        `*Guarde esta mensagem! Ela será utilizada para agilizar o seu atendimento!*`
         ;
 
     const contato = "5551989045720";
