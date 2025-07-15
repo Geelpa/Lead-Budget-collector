@@ -43,24 +43,27 @@ function enviarFormulario() {
         "1000mb": "R$221,11"
     };
 
-    const mensagem = `*DADOS PESSOAIS:*\n` +
+    const mensagem =
+        `Tenho interesse em saber mais dos planos e serviços! Segue abaixo os dados para o atendimento inicial: \n\n` +
+
+        `*Dados Pessoais:*\n` +
         `• Nome: ${nome}\n` +
         `• Telefone: ${telefone}\n` +
         `• Nascimento: ${nascimento}\n` +
         `• Email: ${email}\n` +
         `• Canal de venda: ${canal}\n\n` +
 
-        `*LOCALIZAÇÃO:*\n` +
+        `*Localização:*\n` +
         `• Rua: ${rua}, nº ${numero}\n` +
         `• Bairro: ${bairro}\n` +
         `• Cidade: ${cidade}\n` +
         `${cep ? "• CEP: " + cep + "\n" : ""}\n` +
 
-        `*PLANO E FATURA:*\n` +
+        `*Plano e fatura:*\n` +
         `• Plano escolhido: ${plano} - ${planos[plano]}\n` +
-        `• Vencimento da fatura: Dia ${vencimento}\n` +
-        `• Pagamento da adesão: ${pagamento}\n` +
-        `\n` +
+        `• Data de vencimento: dia ${vencimento}\n` +
+        `• Pagamento da adesão via: ${pagamento}\n\n` +
+
         `*Guarde esta mensagem! Ela será utilizada para agilizar o seu atendimento!*"`
         ;
 
