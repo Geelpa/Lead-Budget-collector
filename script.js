@@ -9,6 +9,7 @@ function calcularIdade(dataNascimento) {
     return idade;
 }
 
+// Envio do formulário
 function enviarFormulario() {
     const nome = document.getElementById("nome").value.trim();
     const nascimento = document.getElementById("nascimento").value;
@@ -32,6 +33,26 @@ function enviarFormulario() {
 
     if (calcularIdade(nascimento) < 18) {
         alert("Cliente deve ser maior de idade.");
+        return;
+    }
+
+    if (!emailValido(email)) {
+        alert("E-mail inválido.");
+        return;
+    }
+
+    if (!apenasNumero(telefone) || telefone.length < 10 || telefone.length > 11) {
+        alert("Telefone inválido. Deve conter 10 ou 11 dígitos.");
+        return;
+    }
+
+    if (!apenasNumero(cep) || cep.length !== 8) {
+        alert("CEP inválido. Deve conter 8 dígitos.");
+        return;
+    }
+
+    if (!opcoes.includes(canal)) {
+        alert("Selecione uma opção válida do canal de venda.");
         return;
     }
 
@@ -64,44 +85,18 @@ function enviarFormulario() {
         `• Data de vencimento: dia ${vencimento}\n` +
         `• Pagamento da adesão via: ${pagamento}\n\n` +
 
-        `*Guarde esta mensagem! Ela será utilizada para agilizar o seu atendimento!*`
-        ;
+        `*Guarde esta mensagem! Ela será utilizada para agilizar o seu atendimento!*`;
 
     const contato = "5551989045720";
     const url = `https://wa.me/${contato}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, "_blank");
 }
 
-// ViaCEP
-document.getElementById("cep").addEventListener("blur", function () {
-    const cep = this.value.replace(/\D/g, "");
-    if (cep.length !== 8) return;
-
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-        .then(response => response.json())
-        .then(data => {
-            if (!("erro" in data)) {
-                document.getElementById("rua").value = data.logradouro || "";
-                document.getElementById("bairro").value = data.bairro || "";
-                document.getElementById("cidade").value = data.localidade || "";
-            } else {
-                alert("CEP não encontrado.");
-            }
-        })
-        .catch(() => {
-            alert("Erro ao buscar o CEP.");
-        });
-});
+// -------------------- AUTOCOMPLETE CANAL --------------------
 
 const opcoes = [
-    "Google",
-    "Indicação",
-    "Site",
-    "Redes sociais",
-    "Feiras/ações",
-    "Indicação condomínio",
-    "Adesivo automotivo",
-    "Outros"
+    "Google", "Indicação", "Site", "Redes sociais", "Feiras/ações",
+    "Indicação condomínio", "Adesivo automotivo", "Outros"
 ];
 
 const input = document.getElementById("canal");
@@ -110,7 +105,6 @@ const sugestoes = document.getElementById("sugestoes-canal");
 function mostrarSugestoes(valorDigitado = "") {
     sugestoes.innerHTML = "";
     const valor = valorDigitado.toLowerCase().trim();
-
     const filtradas = valor
         ? opcoes.filter(opcao => opcao.toLowerCase().includes(valor))
         : opcoes;
@@ -134,27 +128,62 @@ function mostrarSugestoes(valorDigitado = "") {
     sugestoes.style.display = "block";
 }
 
-// Mostra ao digitar
-input.addEventListener("input", () => {
-    mostrarSugestoes(input.value);
-});
-
-// Mostra ao clicar (sem digitar)
-input.addEventListener("focus", () => {
-    mostrarSugestoes("");
-});
-
-
-// Oculta sugestões ao clicar fora
+input.addEventListener("input", () => mostrarSugestoes(input.value));
+input.addEventListener("focus", () => mostrarSugestoes(""));
 document.addEventListener("click", (e) => {
     if (!sugestoes.contains(e.target) && e.target !== input) {
         sugestoes.style.display = "none";
     }
 });
 
-document.getElementById("formulario").addEventListener("submit", function (e) {
-    if (!opcoes.includes(input.value)) {
-        e.preventDefault();
-        alert("Selecione uma opção válida do canal de venda.");
-    }
+// -------------------- VIACEP --------------------
+document.getElementById("cep").addEventListener("blur", () => {
+    const cep = document.getElementById("cep").value.trim();
+    if (!/^\d{8}$/.test(cep)) return;
+
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.erro) {
+                alert("CEP não encontrado.");
+                return;
+            }
+
+            document.getElementById("rua").value = data.logradouro || "";
+            document.getElementById("bairro").value = data.bairro || "";
+            document.getElementById("cidade").value = data.localidade || "";
+        });
 });
+
+// -------------------- BLOQUEIOS DE CARACTERES --------------------
+
+function bloquearCaracteres(campo, regexBloqueio) {
+    campo.addEventListener("input", () => {
+        campo.value = campo.value.replace(regexBloqueio, '');
+    });
+}
+
+// Campos texto puro
+bloquearCaracteres(document.getElementById("nome"), /[^A-Za-zÀ-ÿ\s]/g);
+bloquearCaracteres(document.getElementById("bairro"), /[^A-Za-zÀ-ÿ\s]/g);
+bloquearCaracteres(document.getElementById("cidade"), /[^A-Za-zÀ-ÿ\s]/g);
+
+// Campos apenas número
+bloquearCaracteres(document.getElementById("cep"), /[^\d]/g);
+bloquearCaracteres(document.getElementById("telefone"), /[^\d]/g);
+bloquearCaracteres(document.getElementById("numero"), /[^\d]/g);
+
+// Rua: letras, números, espaços
+document.getElementById("rua").addEventListener("input", (e) => {
+    e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ0-9\s]/g, '');
+});
+
+// -------------------- VALIDADORES AUXILIARES --------------------
+
+function apenasNumero(valor) {
+    return /^\d+$/.test(valor.trim());
+}
+
+function emailValido(valor) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor.trim());
+}

@@ -16,7 +16,8 @@
                 <legend>📍 Dados Pessoais</legend>
                 <div class="form-group full">
                     <label>Nome completo:
-                        <input type="text" id="nome" required>
+                        <input type="text" id="nome" name="nome" required pattern="[A-Za-zÀ-ÿ\s]+"
+                            title="Use apenas letras" />
                     </label>
                 </div>
                 <div class="form-group">
@@ -24,12 +25,13 @@
                         <input type="date" id="nascimento" required>
                     </label>
                     <label>Telefone:
-                        <input type="tel" id="telefone" placeholder="(51) 9XXXX-XXXX" required>
+                        <input type="text" id="numero" name="numero" placeholder="(51) 9XXXX-XXXX" required
+                            pattern="\d+" title="Somente números" />
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Email:
-                        <input type="email" id="email" required>
+                        <input type="email" id="email" name="email" required placeholder="cliente@gmail.com" />
                     </label>
                     <div class="autocomplete-wrapper">
                         <label for="canal">Canal de venda:</label>
@@ -45,7 +47,8 @@
                 <legend>🏡 Localização</legend>
                 <div class="form-group">
                     <label>CEP:
-                        <input type="text" id="cep" maxlength="9" placeholder="00000-000">
+                        <input type="text" id="cep" name="cep" placeholder="ex: 94935-793" required pattern="\d{8}"
+                            title="CEP com 8 dígitos" maxlength="8" />
                     </label>
                     <label>Rua:
                         <input type="text" id="rua" required>
@@ -61,7 +64,7 @@
                 </div>
                 <div class="form-group full">
                     <label>Cidade:
-                        <input type="text" id="cidade" required>
+                        <input type="text" id="cidade" required placeholder="Cachoeirinha">
                     </label>
                 </div>
             </fieldset>
@@ -71,7 +74,7 @@
                 <legend>📦 Plano e Fatura</legend>
 
                 <div class="form-group full">
-                    <label>Plano escolhido:</label>
+                    <label>Planos disponíveis:</label>
                     <div class="radio-group">
                         <label><input type="radio" name="plano" value="100mb" required> 100mb - R$111,00</label>
                         <label><input type="radio" name="plano" value="400mb"> 400mb - R$122,11</label>
@@ -82,7 +85,7 @@
                 </div>
 
                 <div class="form-group full">
-                    <label>Data de vencimento:</label>
+                    <label>Data de vencimento da mensalidade:</label>
                     <div class="radio-group">
                         <label><input type="radio" name="vencimento" value="5" required> Dia 5</label>
                         <label><input type="radio" name="vencimento" value="10"> Dia 10</label>
