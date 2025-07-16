@@ -187,3 +187,23 @@ function apenasNumero(valor) {
 function emailValido(valor) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor.trim());
 }
+
+
+const tooltipContainer = document.getElementById("plano-tooltip");
+const tooltipText = document.getElementById("tooltip-text");
+
+// Detecta toque e ativa/oculta o tooltip
+tooltipContainer.addEventListener("click", function (e) {
+    // Impede o clique de propagar e fecha em clique fora
+    e.stopPropagation();
+    const isVisible = tooltipText.style.visibility === "visible";
+
+    tooltipText.style.visibility = isVisible ? "hidden" : "visible";
+    tooltipText.style.opacity = isVisible ? "0" : "1";
+});
+
+// Fecha o tooltip ao clicar fora
+document.addEventListener("click", function () {
+    tooltipText.style.visibility = "hidden";
+    tooltipText.style.opacity = "0";
+});

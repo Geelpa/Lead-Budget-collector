@@ -165,29 +165,69 @@ button:hover {
     background-color: #d96f1e;
 }
 
-@media (max-width: 768px) {
+.tooltip-container {
+    position: relative;
+    cursor: pointer;
+    color: #ef7e24;
+    font-weight: bold;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    width: 320px;
+    background-color: #fff;
+    color: #333;
+    text-align: left;
+    padding: 12px;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 1000;
+    top: 120%;
+    left: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+@media (max-width: 600px) {
     .form-group {
         grid-template-columns: 1fr;
     }
 
     .radio-group {
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
     }
 
-    .container {
-        padding: 24px 20px;
-        min-width: 100%;
+    label {
+        font-size: 1.1rem;
     }
 
     input[type="text"],
     input[type="email"],
     input[type="date"] {
+        font-size: 1.1rem;
         padding: 14px;
-        font-size: 16px;
+    }
+
+    .tooltip-text {
+        font-size: 0.95rem;
+        width: 100%;
+        left: 0;
+        top: 140%;
     }
 
     button {
-        font-size: 16px;
+        font-size: 1.2rem;
+        padding: 18px;
     }
 }
