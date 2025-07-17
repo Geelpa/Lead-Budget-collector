@@ -41,7 +41,7 @@ function enviarFormulario() {
         return;
     }
 
-    if (!apenasNumero(telefone) || telefone.length < 10 || telefone.length > 11) {
+    if (!apenasNumero(telefone) || telefone.length < 10 || telefone.length > 14) {
         alert("Telefone inválido. Deve conter 10 ou 11 dígitos.");
         return;
     }
@@ -57,11 +57,11 @@ function enviarFormulario() {
     }
 
     const planos = {
-        "100mb": "R$111,00",
-        "400mb": "R$122,11",
-        "600mb": "R$144,32",
-        "800mb": "R$166,55",
-        "1000mb": "R$221,11"
+        "100Mb": "R$111,00",
+        "400Mb": "R$109,90",
+        "600Mb": "R$129,90",
+        "800Mb": "R$149,90",
+        "1Gb": "R$199,90"
     };
 
     const mensagem =
@@ -156,8 +156,8 @@ document.getElementById("cep").addEventListener("blur", () => {
 });
 
 // -------------------- BLOQUEIOS DE CARACTERES --------------------
-
 function bloquearCaracteres(campo, regexBloqueio) {
+    if (!campo) return;
     campo.addEventListener("input", () => {
         campo.value = campo.value.replace(regexBloqueio, '');
     });
@@ -171,7 +171,7 @@ bloquearCaracteres(document.getElementById("cidade"), /[^A-Za-zÀ-ÿ\s]/g);
 // Campos apenas número
 bloquearCaracteres(document.getElementById("cep"), /[^\d]/g);
 bloquearCaracteres(document.getElementById("telefone"), /[^\d]/g);
-bloquearCaracteres(document.getElementById("numero"), /[^\d]/g);
+bloquearCaracteres(document.getElementById("telefone"), /[^\d]/g);
 
 // Rua: letras, números, espaços
 document.getElementById("rua").addEventListener("input", (e) => {
