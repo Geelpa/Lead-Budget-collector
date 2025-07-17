@@ -127,10 +127,7 @@ input:focus {
 .radio-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 6px;
-
-
+    gap: 4px;
 }
 
 .radio-group label {
@@ -138,11 +135,10 @@ input:focus {
     align-items: center;
     gap: 6px;
     font-size: 0.95rem;
-    background: #f9f9f9;
     padding: 6px 10px;
     border-radius: 6px;
     cursor: pointer;
-    background-color: #f9f9f9;
+    background-color: #ececec;
     padding: 8px 12px;
     border-radius: 8px;
     border: 1px solid #ddd;
@@ -233,6 +229,10 @@ button:hover {
         padding: 16px;
     }
 
+    fieldset {
+        margin-bottom: 8px;
+    }
+
     label #text {
         font-size: .9rem;
     }
@@ -243,8 +243,10 @@ button:hover {
     }
 
     .radio-group label {
-        gap: 2px;
-        padding: 6px;
+        gap: 4px;
+        padding: 4px;
+        text-align: center;
+        font-size: 14px;
     }
 
     input[type="text"],
@@ -254,6 +256,10 @@ button:hover {
         font-size: .9rem;
         padding: 10px;
 
+    }
+
+    .radio-group input[type="radio"] {
+        transform: scale(.8);
     }
 
     span .tooltip-text {
@@ -267,7 +273,7 @@ button:hover {
     }
 
     button {
-        font-size: 1.2rem;
-        padding: 18px;
+        font-size: 1rem;
+        padding: 8px;
     }
 }
